@@ -1,0 +1,31 @@
+# Startup page for your application
+start_path = '/app'
+# Path to the options page (in this case handled by javascript)
+options_path = '/app/Settings'
+
+# Location of bundle url (i.e. from rhohub.com)
+rhobundle_zip_url = ''
+
+# Optional password to access bundle (usually not required)
+rhobundle_zip_pwd = nil
+
+# option for blackberry
+use_persistent_storage=1
+
+# load splash screen
+splash_screen='delay=1;center'
+
+# Rhodes runtime properties
+MinSeverity  = 1
+LogToOutput = 1
+LogCategories = *
+ExcludeLogCategories =Œ
+KeepTrackOfLastVisitedPage = 0 
+LastVisitedPage = ''
+
+# Sync server url.  This must be the full path to your sources.  For example: http://rhomobile.rhohub.com/apps/SugarCRM/sources/
+#syncserver = 'http://rhohub-osjunior-18e74568.rhosync.com/application'
+
+# local testing, use your IP address and not 127.0.0.1 because blackberry has issues with that.....
+syncserver = 'http://localhost:9292/application'
+

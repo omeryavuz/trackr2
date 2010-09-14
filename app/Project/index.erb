@@ -1,0 +1,22 @@
+<div id="ajax" class="plastic" style="width:316px">
+  <div class="toolbar">
+    <span class="story_name" style="text-align:center;top:7px"><h1 id="pageTitle">Projects
+      </h1>
+    </span>
+    <%unless System::get_property('platform') == 'APPLE' %>
+      <%=link_to "Settings",{:controller=>"Settings",:action =>:index},"class=\"button right_button\""%>
+    <%end%>
+  </div>
+
+  <ul id="customers" title="Customers" selected="true">
+    <a class="button leftButton"  href="/app/Settings/logout" target="_self">Logout</a>
+    <%@projects.each do |x|%>
+      <li class="table">
+        <a href="/app/Story/index?project_id=<%=x.object.gsub(/[^0-9]/, '')%>"><%=x.name%>
+          <br/>
+          <span style="font-size:12px">Current velocity: <%=x.current_velocity%></span>
+        </a>
+      </li>
+    <%end%>
+  </ul>
+</div>

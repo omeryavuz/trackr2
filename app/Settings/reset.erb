@@ -1,0 +1,18 @@
+<div class="home">
+  <div class="toolbar">
+    <span class="story_name" style="text-align:center;top:7px"><h1 id="pageTitle">Reset Database
+      </h1>
+    </span>
+  </div>
+
+  <ul id="reset_db" selected="true" title="Reset Database">
+    <h3>Are you sure (Resetting removes all objects from your device)?</h3>
+    <br/>
+    <br/>
+
+    <%= link_to "", {:action => :do_reset}, "class=\"reset_confirm_button\""%><br/>
+
+    <%= link_to "", {:action => :index}, "class=\"reset_cancel_button\""%><br/>
+ 
+  </ul>
+</div>

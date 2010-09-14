@@ -1,0 +1,90 @@
+<div id="home" class="plastic"  style="width:316px">
+  <div class="toolbar">
+    <span class="story_name" style="text-align:center;top:7px">
+      <h1 id="pageTitle">
+        <%=@story.story_type%>
+      </h1>
+    </span>
+    <%=link_to "Stories",{:query =>{:id =>@story.project_id},:controller=>"Project",:action =>:index},"class=\"back\""%>
+    <%=link_to "Edit",{:query =>{:project_id=>@story.project_id,:iteration=>@iteration,:id =>@story.object.gsub(/[^0-9]/, '')},:controller=>"Story",:action =>:edit},"class=\"button right_button\""%>
+
+  </div>
+
+
+  <% if @msg %>
+    <p style="color:#ff0000"><%= @msg %></p>
+  <% end %>
+  <ul class="edit">
+    <li><span readonly  class="story_title" >Name</span><br><span readonly class="story_data"><%=@story.name%></span></li>
+    <%if @story.story_type=="feature"%>
+
+      <% if @story.estimate.to_i>0%>
+        <li><span readonly  class="story_title" >Estimate</span><br><span readonly class="story_data"><%=@story.estimate%></span></li>
+      <% else%>
+        <li><span readonly  class="story_title" >Estimate</span><br><input readonly class="story_name" type="text" name="story[estimate]" value="0 Points "/></li>
+      <% end %>
+
+    <%end%>
+    <li><span readonly  class="story_title" >Current state</span><br><span readonly class="story_data"><%=@story.current_state%></span></li>
+    <li><span readonly  class="story_title" >Description</span><br>
+      <span readonly  class="story_data"><%=@story.description%></span>
+    </li>
+    <% if @story.num_comments.to_i > 0 %>
+      <li><%=link_to "Comments (#{@story.num_comments})",{:query =>{:project_id=>@story.project_id,:story_id =>@story.object.gsub(/[^0-9]/, '')},:controller=>"Comment",:action =>:index}%></li>
+    <%else%>
+      <li><span readonly  class="story_title" >Comments (0)</span></li>
+    <%end%>
+  </ul>
+
+  <form title="Login to Rhodes" class="panel"id="story_edit_form" method="POST"
+        action="<%=url_for(:action => 'update')%>" selected="true">
+    <input type="hidden" name="project_id" value="<%=@story.project_id%>"/>
+    <input type="hidden" name="iteration" value="<%=@iteration%>"/>
+    <input type="hidden" name="story_id" value="<%=@story.object.gsub(/[^0-9]/, '')%>"/>
+    <input type="hidden" name="story[name]" value="<%=@story.name%>"/>
+    <input type="hidden" name="story[estimate]" value="<%=@story.estimate%>"/>
+    <input type="hidden" name="story[description]" value="<%=@story.description%>"/>
+    <input type="hidden" id="current_state" name="story[current_state]" value="<%=@story.current_state%>"/>
+    <br>
+    <li class="action_button">
+      <% if @story.story_type!= "release" %>
+        <% if @story.current_state == "unscheduled" %>
+          <input type="submit"  onclick="document.getElementById('current_state').value='started';" class="started" value=""/>
+        <% end %>
+      <%end%>
+
+      <% if @story.story_type!= "release" %>
+        <% if @story.current_state == "unstarted" %>
+          <input type="submit"  onclick="document.getElementById('current_state').value='finished';" class="started" value=""/>
+        <% end %>
+      <%else%>
+        <input type="submit"  onclick="document.getElementById('current_state').value='finished';" class="finished" value=""/>
+      <%end%>
+
+      <% if @story.current_state == "started"%>
+        <% if @story.story_type!="chore" %>
+          <input type="submit"  onclick="document.getElementById('current_state').value='finished';" class="finished" value=""/>
+        <% else%>
+          <input type="submit"  onclick="document.getElementById('current_state').value='accepted';" class="finished" value=""/>
+        <% end%>
+      <%end%>
+
+      <% if @story.current_state == "finished" %>
+        <input type="submit"  onclick="document.getElementById('current_state').value='delivered';" class="delivered" value=""/>
+      <% end %>
+      <% if @story.current_state == "delivered" %>
+
+        <input type="submit"  onclick="document.getElementById('current_state').value='accepted';" class="accepted_button" value=""/>
+        <input type="submit"  onclick="document.getElementById('current_state').value='rejected';" class="reject_button" value=""/>
+
+      <% end %>
+      <% if @story.current_state == "rejected" %>
+        <input type="submit"  onclick="document.getElementById('current_state').value='started';" class="restart_button" value=""/>
+      <% end %>
+      <br>
+      <br>
+      <br>
+    </li>
+  </form>
+
+</div>

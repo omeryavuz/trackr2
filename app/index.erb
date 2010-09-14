@@ -1,0 +1,11 @@
+<div id="home" class="background_login" >
+  <% if SyncEngine::logged_in > 0 %>
+    <%if System::get_property('platform') == 'APPLE' %>
+      <script language="JavaScript">window.location ='/app/Project/tab_index';</script>
+    <%else%>
+      <script language="JavaScript">window.location ='/app/Project/index';</script>
+    <%end%>
+  <% else %>
+    <script language="JavaScript">window.location ='/app/Settings/login';</script>
+  <% end %>
+</div>

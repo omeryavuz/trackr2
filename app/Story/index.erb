@@ -1,0 +1,139 @@
+<div id="ajax"  class="plastic"  style="width:316px">
+  <div class="toolbar">
+  </div>
+<ul id="customers" title="Customers" selected="true">
+    <%=link_to "Project",{:controller=>"Project",:action =>:index},"class=\"back\""%>
+    <a class="button slideup" style="position:absolute !important; top:8px !important;width:49px; left:128px !important;text-align:center" href="#iteration" target="_self"><span><%= @iteration.gsub(/^./) {|l| l.upcase}%></span></a>
+    <a class="add slideup" id="newMessageLink" href="#add_story">+</a>
+    <%@stories.each do |x|%>
+      <li >
+        <a  href="/app/Story/show/<%=x.object%>?project_id=<%=@project_id%>&iteration=<%=@iteration%>">
+          <div style="float:left;width:35px;font-weight:normal;">
+            <img class="menu_icon" src="/public/images/<%=x.story_type%>_small.png"/>
+            <% if !x.description.nil? && !x.description.empty? %>
+              <br class="clear"/><img class="menu_icon" src="/public/images/chat.png"/>
+            <% end %>
+          </div>
+          <div style="float:left;width:235px;">
+            <span class="story_name"><%= x.name %></span><br class="clear"/>
+            <span class="story_<%=x.current_state%>"><%=x.current_state.gsub(/^./) {|l| l.upcase}%></span>
+            <%if x.story_type == "feature" %>
+              <%if x.estimate.to_i>0%>
+                <span class="story_estimate"> Points: <%=x.estimate %> </span>
+                <br>
+                <%if x.num_comments.to_i > 0%>
+                  <span class="story_estimate">Comments (<%= x.num_comments.to_i ? x.num_comments.to_i : 0 %>)</span>
+                <% end%>
+              <% else %>
+                <span class="story_estimate"> Points: 0 </span>
+                <br>
+                <%if x.num_comments.to_i > 0%>
+                  <span class="story_estimate">Comments (<%= x.num_comments ?  x.num_comments : 0 %>)</span>
+                <% end%>
+              <% end %>
+            <% end %>
+          </div>
+        </a>
+      </li>
+    <%end%>
+    <br>
+    <br>
+  </ul>
+</div>
+
+<div id="add_story" class="plastic"  style="width:316px">
+  <div class="toolbar">
+    <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=<%=@iteration%>" class="button leftButton">Cancel</a>
+    <span class="story_name" style="text-align:center;top:7px"><h1>Add Story</h1></span>
+  </div>
+  <ul id="ticket" class="project">
+    <li>
+      <a href="/app/Story/new?project_id=<%= @project_id %>&iteration=<%=@iteration%>&type=feature" class="project">
+        <div style="float:left;width:35px;font-weight:normal;">
+          <img class="menu_icon" src="/public/images/feature_small.png"/>
+        </div>
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Add new feature</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/app/Story/new?project_id=<%= @project_id %>&iteration=<%=@iteration%>&type=bug" class="project">   <div style="float:left;width:35px;font-weight:normal;">
+          <img class="menu_icon" src="/public/images/bug_small.png"/>
+        </div>
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Add new bug</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/app/Story/new?project_id=<%= @project_id %>&iteration=<%=@iteration%>&type=chore" class="project">   <div style="float:left;width:35px;font-weight:normal;">
+          <img class="menu_icon" src="/public/images/chore_small.png"/>
+        </div>
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Add new chore</span>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/app/Story/new?project_id=<%= @project_id %>&iteration=<%=@iteration%>&type=release" class="project">
+        <div style="float:left;width:35px;font-weight:normal;">
+          <img class="menu_icon" src="/public/images/release_small.png"/>
+        </div>
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Add new release</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div id="iteration" class="plastic"  style="width:316px">
+  <div class="toolbar">
+    <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=<%=@iteration%>" class="button leftButton">Cancel</a>
+    <span class="story_name" style="text-align:center;top:7px"><h1>Iteration</h1></span>
+  </div>
+
+  <ul id="ticket" class="project">
+    <li>
+      <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=current" class="add_new">
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Current</span>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=backlog" class="add_new">
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Backlog</span>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=done" class="add_new">
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Done</span>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=icebox" class="add_new">
+        <div style="float:left;width:235px;">
+          <small style="font-size:14px;"></small>
+          <span class="story_name">Icebox</span>
+        </div>
+      </a>
+    </li>
+ </ul>
+</div>
+

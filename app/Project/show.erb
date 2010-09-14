@@ -1,0 +1,18 @@
+<div class="toolbar">
+	<h1 id="pageTitle">
+		<%=@project.name%>
+	</h1>
+</div>
+
+<div class="panel" selected="true">
+
+<a class="button right_button" href="<%=url_for(:action => :edit, :id => @project.object)%>" target="_self">Edit</a>
+
+<table class="grid">
+  
+  <tr>
+	<td class="gridleft">Name</td>
+    <td class="gridright"><%=@project.name%></td>
+  </tr>
+ </table>
+</div>

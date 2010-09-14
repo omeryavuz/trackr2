@@ -1,0 +1,22 @@
+<div  class="plastic" style="width:316px">
+  <div class="toolbar">
+    <span class="story_name" style="text-align:center;top:7px"><h1 id="pageTitle">Settings
+      </h1>
+    </span>
+    <%unless System::get_property('platform') == 'APPLE' %>
+      <%=link_to "Projects",{:controller=>"Project",:action =>:index},"class=\"back\""%>
+    <%end%>
+  </div>
+
+  <ul id="settings" selected="true" title="Settings">
+    <% if @msg %><li style="color:#97c43a" align="center"><%=@msg%></li><% end %>
+    <li><span style="color:#FFFFFF">Client ID: </span><br/><span style="font-size: 80%;color:#97C435"><%=Rhom::Rhom::client_id%></span></li>
+    <li><%=link_to "Reset Database", :action => :reset%></li>
+    <li><%=link_to "Perform Sync", :action => :do_sync%></li>
+    <% if SyncEngine::logged_in > 0 %>
+      <li><%=link_to "Logout", :action => :logout%></li>
+    <% else %>
+      <li><%=link_to "Login", :action => :login%></li>
+    <% end %>
+  </ul>
+</div>

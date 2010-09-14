@@ -1,0 +1,93 @@
+.login{
+    background:transparent url(/public/images/login.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    text-align:center;
+    width:291px;
+}
+.started{
+    background:transparent url(/public/images/start.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    text-align:center;
+    width:291px
+}
+.finished{
+    background:transparent url(/public/images/finish.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    text-align:center;
+    width:291px;
+}
+.delivered{
+    background:transparent url(/public/images/deliver.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    text-align:center;
+    width:291px;
+}
+.save{
+    background:transparent url(/public/images/save.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    text-align:center;
+    width:291px
+}
+.accepted_button{
+    background:transparent url(/public/images/accept.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    width:137px;
+    float:left;
+}
+.reject_button{
+    background:transparent url(/public/images/reject.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    width:137px;
+    float:right;
+}
+.restart_button{
+    background:transparent url(/public/images/restart.png) no-repeat scroll 0 0;
+    border:medium none;
+    margin-top:0px;
+    height:47px;
+    width:291px;
+
+
+}
+.save_tickets{
+    background:transparent url(/public/images/save_tickets.png) no-repeat scroll 0 0;
+    border:medium none;
+    float:left;
+    height:55px;
+    margin-right:5px;
+    margin-top:-10px;
+    width:300px;
+}
+.delete_story{
+    background:transparent url(/public/images/delete.png) no-repeat scroll 0 0;
+    border:medium none;
+    height:47px;
+    text-align:center;
+    width:291px
+}
+
+.add_story{
+    width:93.8%;
+    padding:10px;
+    background: #636373 url(/public/images/add_story_bground.png) repeat-x;
+}
+.close_add_story{
+    float:right;
+    margin-right:10px;
+    width:32px;
+    height:33px;
+    background: url(/public/images/close_popup.png) no-repeat right center;
+}
+.add_new{
+    color:white;
+    display:block;
+    padding-bottom:20px;
+    text-decoration:none;
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html >
+  <head>
+    <title>Trackr</title>
+
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+    <% unless System::get_property('platform') == 'Blackberry' %>
+      <script src="/public/js/jquery.1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/public/js/jqtouch.min.js" type="application/x-javascript" charset="utf-8"></script>
+      <script src="/public/js/rho.js"></script>
+      <script src="/public/js/application.js"></script>
+      <link href="/public/css/iphone.css" type="text/css" rel="stylesheet"/>
+      <link rel="stylesheet" href="/public/themes/jqt/theme.min.css" type="text/css">
+      <link rel="stylesheet" href="/public/css/jqtouch.min.css" type="text/css">
+
+      <script type="text/javascript" charset="utf-8">
+        $.jQTouch({
+          addGlossToIcon: false,
+          startupScreen: 'jqt_startup.png',
+          statusBar: 'black'
+        });
+
+        // Some sample Javascript functions:
+        $(function(){
+
+          // Show a swipe event on swipe test
+          $('#swipeme').addTouchHandlers().bind('swipe', function(evt, data){
+            $(this).html('You swiped <strong>' + data.direction + '</strong>!');
+            // alert('Swiped '+ data.direction +' on #' + $(evt.currentTarget).attr('id') + '.');
+          });
+
+          $('a[target="_blank"]').click(function(){
+            if(confirm('This link opens in a new window.'))
+            {
+              return true;
+            }
+            else
+            {
+              $(this).removeClass('active');
+              return false;
+            }
+          });
+
+          // Page transition callback events
+          $('#pageevents').
+            bind('pageTransitionStart', function(e, info){
+            $(this).find('.info').append('Started transitioning ' + info.direction + '&hellip; ');
+          }).
+            bind('pageTransitionEnd', function(e, info){
+            $(this).find('.info').append(' finished transitioning ' + info.direction + '.<br /><br />');
+          });
+
+
+          // AJAX with callback event
+          $('#callback').
+            bind('pageTransitionEnd', function(e, info){
+            if (info.direction == 'in' && $(this).data('loaded') != 'true')
+            {
+              $(this).
+                append($('<div>Loading &hellip;</div>').
+                load('ajax.html .info', function(){
+                $(this).parent().data('loaded', 'true');
+              }));
+            }
+          });
+
+          // Orientation callback event
+          $('body').bind('turn', function(e, data){
+            $('#orient').html('Orientation: ' + data.orientation);
+          })
+        });
+      </script>
+    <%else%>
+      <link href="/public/css/blackberry.css" type="text/css" rel="stylesheet"/>
+    <%end%>
+  </head>
+  <body>
+    <%= @content %>
+  </body>
+</html>

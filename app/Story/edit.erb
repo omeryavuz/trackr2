@@ -1,0 +1,64 @@
+<div id="home" class="plastic"  style="width:316px">
+  <div class="toolbar">
+    <span class="story_name" style="text-align:center;top:7px">
+      <h1 id="pageTitle">
+        Edit Story
+      </h1>
+      <%=link_to "Back",{:query =>{:id =>@story.object.gsub(/[^0-9]/, '')},:controller=>"Story",:action =>:show},"class=\"back\""%>
+      <a class="button" onclick="$('#story_edit_form').submit();" id="infoButton" >Save</a>
+
+    </span>
+  </div>
+
+
+  <form title="Login to Rhodes"
+        class="panel"
+        id="story_edit_form"
+        method="POST"
+        action="<%=url_for(:action => 'update')%>" selected="true">
+
+    <% if @msg %>
+      <p style="color:#ff0000"><%= @msg %></p>
+    <% end %>
+    <ul class="edit">
+      <li>
+        <span readonly  class="story_title" >Name</span>
+        <textarea type="text" name="story[name]"><%=@story.name%></textarea></li>
+      <%if @story.story_type=="feature" %>
+        <li><span readonly  class="story_title" >Estimate</span>
+          <select class="input" type="text"  name="story[estimate]"  >
+            <option value="0"  <% if @story.estimate == "-1" %>selected<% end %> >Unestimated</option>
+            <option value="1"  <% if @story.estimate == "1" %>selected<% end %> >1 point</option>
+            <option value="2"  <% if @story.estimate == "2" %>selected<% end %> >2 points</option>
+            <option value="3"  <% if @story.estimate == "3" %>selected<% end %> >3 points</option>
+            <option value="5"  <% if @story.estimate == "5" %>selected<% end %> >5 points</option>
+            <option value="5"  <% if @story.estimate == "8" %>selected<% end %> >8 points</option>
+          </select>
+        </li>
+      <%end%>
+      <li><span readonly  class="story_title" >Current estate</span>
+        <select class="input" type="text"  name="story[current_state]" >
+          <option value="accepted" >Accepted</option>
+          <option value="unscheduled" >Unscheduled</option>
+          <option value="unstarted" >Unstarted</option>
+          <%if @story.story_type!="release" %>
+            <option value="started" >Started</option>
+            <%if @story.story_type!="chore" %>
+              <option value="finished" >Finished</option>
+              <option value="delivered" >Delivered</option>
+              <option value="rejected" >Rejected</option>
+
+            <%end%>
+          <%end%>
+        </select> </li>
+      <li><span readonly  class="story_title" >Description</span><textarea class="input"  type="text" name="story[description]" ><%=@story.description%></textarea></li>
+
+    </ul>
+  </form>
+  <br>
+  <p align="center">
+    <input onclick="window.location.href='/app/Story/delete?iteration=<%=@iteration%>&project_id=<%=@story.project_id%>&story_id=<%=@story.object.gsub(/[^0-9]/, '')%>'"   class="delete_story" type="submit" value=""/>
+    <br>
+    <br>
+  </p>
+</div>
