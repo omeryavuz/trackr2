@@ -2,6 +2,6 @@
 # You can add more methods here
 class Comment
   include Rhom::PropertyBag
-  
+  enable :sync
   #add model specifc code here
 end

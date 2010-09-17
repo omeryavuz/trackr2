@@ -2,10 +2,13 @@ require 'rho/rhocontroller'
 class CommentController < Rho::RhoController
 
   def index
+    puts "coments"*120
     @story_id=@params['story_id']
     project_id=@params['project_id']
     #    unless  story_id.nil? || story_id.empty?
     @comments = Comment.find(:all,:conditions =>{:story_id =>@story_id})
+    puts @comments.inspect
+   
     if (@comments.nil? || @comments.empty?)&&get_count_search<=0
       Comment.search(
         :from => 'search',
@@ -23,7 +26,7 @@ class CommentController < Rho::RhoController
 
   def search_callback
     status = @params['status']
-    if (status && status == 'ok' && @params['story_id']&& @params['project_id'])
+    if (status && status == 'complete' && @params['story_id']&& @params['project_id'])
       WebView.navigate( url_for :action => :index,
         :query => {:count_search=>get_count_search,:project_id => @params['project_id'].gsub(/[^0-9]/, ''), :story_id => @params['story_id'].gsub(/[^0-9]/, '')} )
     end

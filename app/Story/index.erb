@@ -20,7 +20,7 @@
             <% end %>
           </div>
           <div style="float:left;width:235px;">
-            <span class="story_name"><%= x.name %> - <%=x.object%> </span><br class="clear"/>
+            <span class="story_name"><%= x.name %> </span><br class="clear"/>
             <span class="story_<%=x.current_state%>"><%=x.current_state.gsub(/^./) {|l| l.upcase}%></span>
             <%if x.story_type == "feature" %>
               <%if x.estimate.to_i>0%>

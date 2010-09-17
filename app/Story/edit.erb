@@ -40,17 +40,18 @@
         </li>
       <%end%>
       <li><span readonly  class="story_title" >Current estate</span>
-        <select class="input" type="text"  name="story[current_state]" >
-          <option value="accepted" >Accepted</option>
-          <option value="unscheduled" >Unscheduled</option>
-          <option value="unstarted" >Unstarted</option>
-          <%if @story.story_type!="release" %>
-            <option value="started" >Started</option>
-            <%if @story.story_type!="chore" %>
-              <option value="finished" >Finished</option>
-              <option value="delivered" >Delivered</option>
-              <option value="rejected" >Rejected</option>
-
+        <select class="input" type="text"  name="story[current_state]"  >
+         <%if @current_state =='accepted' %><option value="accepted" selected>Accepted</option><%else%><option value="accepted" >Accepted</option><%end%>
+         <%if @current_state =='unscheduled' %><option value="unscheduled" selected>Accepted</option><%else%><option value="unscheduled" >Unscheduled</option><%end%>
+	 	 <%if @current_state =='unstarted' %><option value="unstarted" selected>Unstarted</option><%else%><option value="unstarted" >Unstarted</option><%end%>
+		 <%if @story.story_type!="release" %>
+         <%if @current_state =='started' %><option value="started" selected>Started</option><%else%><option value="started" >Started</option><%end%>
+	
+           <%if @story.story_type!="chore" %>
+             <%if @current_state =='finished' %><option value="finished" selected>Finished</option><%else%><option value="finished" >Finished</option><%end%>
+			 <%if @current_state =='delivered' %><option value="delivered" selected>Delivered</option><%else%><option value="delivered" >Delivered</option><%end%>
+			 <%if @current_state =='rejected' %><option value="rejected" selected>Rejected</option><%else%><option value="rejected" >Rejected</option><%end%>
+ 
             <%end%>
           <%end%>
         </select> </li>

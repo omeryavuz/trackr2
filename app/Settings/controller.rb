@@ -16,7 +16,7 @@ class SettingsController < Rho::RhoController
     @msg = @params['msg']
     @@toolbar = nil
     unless @msg.nil?
-      @msg = "You entered an invalid credential"
+      @msg = "You entered an invalid credential" if @msg!="You have been logged out." 
     end
     render :action => :login
   end

@@ -69,6 +69,9 @@ class StoryController < Rho::RhoController
 
   def edit
     @iteration=@params['iteration']
+    @current_state=@params['current_state']
+    puts "%%"*120
+    puts @current_state
     @project_id=@params['project_id']
     @story = Story.find(@params['id'])
     render :action => :edit
