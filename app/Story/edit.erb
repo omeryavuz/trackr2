@@ -5,7 +5,7 @@
         Edit Story
       </h1>
       <%=link_to "Back",{:query =>{:id =>@story.object.gsub(/[^0-9]/, '')},:controller=>"Story",:action =>:show},"class=\"back\""%>
-      <a class="button" onclick="$('#story_edit_form').submit();" id="infoButton" >Save</a>
+      <a class="button" onclick="$('#story_edit_forms').submit();" id="infoButton" >Save</a>
 
     </span>
   </div>
@@ -13,9 +13,12 @@
 
   <form title="Login to Rhodes"
         class="panel"
-        id="story_edit_form"
+        id="story_edit_forms"
         method="POST"
         action="<%=url_for(:action => 'update')%>" selected="true">
+        <input type="hidden" name="story[project_id]" value="<%=@story.project_id%>"/>
+	    <input type="hidden" name="story_id" value="<%=@story.object%>"/>
+	    <input type="hidden" name="iteration" value="<%=@iteration%>"/>
 
     <% if @msg %>
       <p style="color:#ff0000"><%= @msg %></p>

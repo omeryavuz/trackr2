@@ -19,7 +19,7 @@
       <p style="color:#ff0000"><%= @msg %></p>
     <% end %>
     <ul class="edit">
-      <li><input type="hidden" name="project_id" value="<%=@story.project_id%>"/>
+      <li><input type="hidden" name="story[project_id]" value="<%=@story.project_id%>"/>
         <input type="hidden" name="story[story_type]" value="<%=@type%>"/>
         <input type="hidden" name="story[current_state]" value="unscheduled"/>
         <span readonly  class="story_title" >Name</span>

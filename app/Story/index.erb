@@ -7,21 +7,26 @@
     <a class="add slideup" id="newMessageLink" href="#add_story">+</a>
     <%@stories.each do |x|%>
       <li >
-        <a  href="/app/Story/show/<%=x.object%>?project_id=<%=@project_id%>&iteration=<%=@iteration%>">
-          <div style="float:left;width:35px;font-weight:normal;">
+	<% if !x.object.empty? %>
+	  <a  href="/app/Story/show/<%=x.object%>?project_id=<%=@project_id%>&iteration=<%=@iteration%>">
+     <%else%> 
+	  <a  href="/app/Story/show/<%=x.object%>?id=null&project_id=<%=@project_id%>&iteration=<%=@iteration%>">
+     <%end%>   
+
+        <div style="float:left;width:35px;font-weight:normal;">
             <img class="menu_icon" src="/public/images/<%=x.story_type%>_small.png"/>
             <% if !x.description.nil? && !x.description.empty? %>
               <br class="clear"/><img class="menu_icon" src="/public/images/chat.png"/>
             <% end %>
           </div>
           <div style="float:left;width:235px;">
-            <span class="story_name"><%= x.name %></span><br class="clear"/>
+            <span class="story_name"><%= x.name %> - <%=x.object%> </span><br class="clear"/>
             <span class="story_<%=x.current_state%>"><%=x.current_state.gsub(/^./) {|l| l.upcase}%></span>
             <%if x.story_type == "feature" %>
               <%if x.estimate.to_i>0%>
                 <span class="story_estimate"> Points: <%=x.estimate %> </span>
                 <br>
-                <%if x.num_comments.to_i > 0%>
+                <%if x.num_comments.to_i > 0%>-
                   <span class="story_estimate">Comments (<%= x.num_comments.to_i ? x.num_comments.to_i : 0 %>)</span>
                 <% end%>
               <% else %>
@@ -127,7 +132,7 @@
     </li>
 
     <li>
-      <a href="/app/Story/index?project_id=<%= @project_id %>&iteration=icebox" class="add_new">
+      <a href="/app/Story/index?project_id=<%=@project_id %>&iteration=icebox" class="add_new">
         <div style="float:left;width:235px;">
           <small style="font-size:14px;"></small>
           <span class="story_name">Icebox</span>

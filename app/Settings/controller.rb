@@ -88,6 +88,8 @@ class SettingsController < Rho::RhoController
     Rhom::Rhom.database_full_reset
     SyncEngine.dosync
     @msg = "Database has been reset."
+    puts "$$$"*120
+    puts Story.find(:all).inspect
     redirect :action => :index, :query => {:msg => @msg}
   end
   
